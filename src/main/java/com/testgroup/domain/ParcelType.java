@@ -1,4 +1,4 @@
-package com.testgroup.deliverysystem.domain;
+package com.testgroup.domain;
 
 /**
  * @author beata.ilowiecka@impaqgroup.com on 06.12.16.

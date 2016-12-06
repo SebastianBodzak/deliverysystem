@@ -1,8 +1,10 @@
-package com.testgroup.deliverysystem.domain;
+package com.testgroup.domain;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import java.time.LocalDateTime;
 
@@ -12,8 +14,11 @@ import java.time.LocalDateTime;
 @Entity
 public class Shipment {
 
-    @OneToOne
-    private Parcel parcel;
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    private Long parcelId;
 
     @OneToOne
     private User miner;
@@ -24,9 +29,13 @@ public class Shipment {
     public Shipment() {
     }
 
-    public Shipment(Parcel parcel, LocalDateTime date, User miner) {
-        this.parcel = parcel;
-        this.date = date;
-        this.miner = miner;
+    public Shipment(Long parcelId) {
+        this.parcelId = parcelId;
+        this.date = LocalDateTime.now();
+        this.miner = null; //mock
+    }
+
+    public Long getId() {
+        return id;
     }
 }

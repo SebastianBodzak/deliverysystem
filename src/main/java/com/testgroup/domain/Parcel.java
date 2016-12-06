@@ -1,4 +1,4 @@
-package com.testgroup.deliverysystem.domain;
+package com.testgroup.domain;
 
 import javax.persistence.*;
 
@@ -18,11 +18,13 @@ public class Parcel {
     private User recipient;
     @Enumerated(EnumType.STRING)
     private ParcelType parcelType;
-    @OneToOne
+    @Embedded
     private Attachment attachment;
 
     private String content;
     private String overwrittenRecipient;
+
+    private Parcel() {}
 
     public Parcel(Attachment attachment, String content, ParcelType parcelType, User recipient, User sender) {
         this.attachment = attachment;
@@ -34,5 +36,9 @@ public class Parcel {
 
     public void overwriteUser(String user) {
         this.overwrittenRecipient = user;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

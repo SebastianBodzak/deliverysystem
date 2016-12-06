@@ -1,4 +1,4 @@
-package com.testgroup.deliverysystem.domain;
+package com.testgroup.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
