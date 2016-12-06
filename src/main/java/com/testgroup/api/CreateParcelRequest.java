@@ -28,11 +28,11 @@ public class CreateParcelRequest {
     }
 
     public Long getSenderId() {
-        return parcel.getSenderId();
+        return parcel.getSender();
     }
 
     public Long getRecipientId() {
-        return parcel.getRecipientId();
+        return parcel.getRecipient();
     }
 
     public String getOverwriteRecipient() {

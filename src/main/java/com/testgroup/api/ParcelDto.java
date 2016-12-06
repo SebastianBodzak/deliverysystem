@@ -12,8 +12,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ParcelDto {
 
-    private Long senderId; //beacuse lack of sessions
-    private Long recipientId;
+    private Long sender; //beacuse lack of sessions
+    private Long recipient;
     private String parcelType;
     private String content;
     private String overwriteRecipientData;

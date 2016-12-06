@@ -22,7 +22,7 @@ public class SendingService {
         User recipient = userRepository.load(request.getRecipientId());
         Parcel parcel = createParcel(request, sender, recipient);
         Long parcelId = parcelRepository.save(parcel);
-        return shipmentRegistry.save(new Shipment(1L));
+        return shipmentRegistry.save(new Shipment(parcelId));
     }
 
     private Parcel createParcel(CreateParcelRequest request, User recipient, User sender) {

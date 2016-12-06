@@ -1,10 +1,6 @@
 package com.testgroup.domain;
 
-import javax.annotation.Generated;
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import java.io.File;
 
 /**
@@ -14,6 +10,8 @@ import java.io.File;
 public class Attachment {
 
     private File file;
+
+    private Attachment(){}
 
     public Attachment(File file) {
         this.file = file;

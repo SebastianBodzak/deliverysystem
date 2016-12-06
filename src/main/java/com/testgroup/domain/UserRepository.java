@@ -5,4 +5,5 @@ package com.testgroup.domain;
  */
 public interface UserRepository {
     User load(Long senderId);
+    Long save(User user);
 }

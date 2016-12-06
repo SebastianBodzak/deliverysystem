@@ -20,4 +20,10 @@ public class LocalUserRepository implements UserRepository {
     public User load(Long senderId) {
         return entityManager.find(User.class, senderId);
     }
+
+    @Override
+    public Long save(User user) {
+        entityManager.persist(user);
+        return user.getId();
+    }
 }
