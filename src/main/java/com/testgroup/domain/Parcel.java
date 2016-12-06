@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Parcel {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne

@@ -9,8 +9,6 @@ import java.io.File;
 /**
  * Created by sbod on 06.12.16.
  */
-@Setter
-@Getter
 @AllArgsConstructor
 public class CreateParcelRequest {
 
@@ -37,5 +35,21 @@ public class CreateParcelRequest {
 
     public String getOverwriteRecipient() {
         return parcel.getOverwriteRecipientData();
+    }
+
+    public ParcelDto getParcel() {
+        return parcel;
+    }
+
+    public void setParcel(ParcelDto parcel) {
+        this.parcel = parcel;
+    }
+
+    public File getAttachment() {
+        return attachment;
+    }
+
+    public void setAttachment(File attachment) {
+        this.attachment = attachment;
     }
 }
