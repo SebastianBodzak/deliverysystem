@@ -29,31 +29,29 @@ public class EthereumListener extends EthereumListenerAdapter {
         System.out.println();
     }
 
-
-
     /**
-     *  Mark the fact that you are touching
-     *  the head of the chain
+     * Mark the fact that you are touching
+     * the head of the chain
      */
     @Override
     public void onSyncDone() {
-
         System.out.println(" ** SYNC DONE ** ");
         syncDone = true;
     }
 
     /**
      * Just small method to estimate total power off all miners on the net
+     *
      * @param block
      */
-    private void calcNetHashRate(Block block){
+    private void calcNetHashRate(Block block) {
 
-        if ( block.getNumber() > 1000){
+        if (block.getNumber() > 1000) {
 
             long avgTime = 1;
             long cumTimeDiff = 0;
             Block currBlock = block;
-            for (int i=0; i < 1000; ++i){
+            for (int i = 0; i < 1000; ++i) {
 
                 Block parent = ethereum.getBlockchain().getBlockByHash(currBlock.getParentHash());
                 long diff = currBlock.getTimestamp() - parent.getTimestamp();
@@ -68,7 +66,6 @@ public class EthereumListener extends EthereumListenerAdapter {
 
             System.out.println("Net hash rate: " + hashRate + " GH/s");
         }
-
     }
 
 }
