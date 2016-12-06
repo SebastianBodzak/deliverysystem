@@ -2,7 +2,9 @@ package com.testgroup.ethereum;
 
 import org.ethereum.facade.Ethereum;
 import org.ethereum.facade.EthereumFactory;
+import org.springframework.stereotype.Component;
 
+@Component
 public class EthereumBean {
 
     Ethereum ethereum;
