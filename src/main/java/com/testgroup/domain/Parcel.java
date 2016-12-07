@@ -41,4 +41,8 @@ public class Parcel {
     public Long getId() {
         return id;
     }
+
+    public ParcelType getParcelType() {
+        return parcelType;
+    }
 }
