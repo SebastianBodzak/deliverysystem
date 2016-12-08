@@ -45,4 +45,17 @@ public class Parcel {
     public ParcelType getParcelType() {
         return parcelType;
     }
+
+    @Override
+    public String toString() {
+        return "Parcel{" +
+                "id=" + id +
+                ", sender=" + sender +
+                ", recipient=" + recipient +
+                ", parcelType=" + parcelType +
+                ", attachment=" + attachment +
+                ", content='" + content + '\'' +
+                ", overwrittenRecipient='" + overwrittenRecipient + '\'' +
+                '}';
+    }
 }
