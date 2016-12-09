@@ -35,40 +35,26 @@ public class BlockchainRepository {
             }
         }));
         this.blockchain = blockchain;
+        printInfo("BEST BLOCK After creating GENESIS");
         this.contract = blockchain.submitNewContract(solidityContract);
-
-        printInfoBeforeCreatingBlock();
-
-        blockchain.createBlock();
-
-        printInfoAfterCreatingBlock();
+        printInfo("BEST BLOCK After creating CONTRACT");
     }
 
-
-    private void printInfoAfterCreatingBlock() {
-        System.out.println("######################################################### BLOCKCHAIN \n\n" + blockchain.getBlockchain() + "\n" +
-                "\n######################################################### ");
-        System.out.println("######################################################### BEST BLOCK: \n\n" + blockchain.getBlockchain().getBestBlock() + "\n" +
-                "\n######################################################### ");
-    }
-
-    private void printInfoBeforeCreatingBlock() {
-        System.out.println("######################################################### BEST BLOCK BEFORE: \n\n" + blockchain.getBlockchain().getBestBlock() + "\n" +
+    private void printInfo(String about) {
+        System.out.println("#########################################################  " + about +" : \n\n" +
+                blockchain.getBlockchain().getBestBlock() + "\n" +
                 "\n######################################################### ");
     }
 
     public void createTransaction(String parcel) {
-        printInfoBeforeCreatingBlock();
-        blockchain.createBlock();
-        printInfoAfterCreatingBlock();
-
         printContract();
         contract.callFunction("createParcel", parcel);
-        printContract();
+        printInfo("BEST BLOCK AFTER CALLING FUNCTION CREATE PARCEL");
     }
 
     private void printContract() {
-        System.out.println("\n\n######################################################### CONTRACT: \n\n" + contract + "\n" +
+        System.out.println("\n\n######################################################### CALLING CONTRACT FUNCTION: \n\n" +
+                contract + "\n" +
                 "\n######################################################### ");
     }
 }

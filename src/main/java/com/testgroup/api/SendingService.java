@@ -36,12 +36,9 @@ public class SendingService {
         Long shipmentID = shipmentRegistry.save(new Shipment(parcelId, request.getSenderId(),
                 request.getRecipientId(), parcel.getParcelType()));
 
-        System.out.println("\n\n ******************************************CREATES TRANSACTION AT:  ");
-        System.out.println(LocalDateTime.now());;
-        String parcelData = parcel.toString();
-        blockchainRepository.createTransaction(parcelData);
-        System.out.println("\n\n ******************************************ENDS TRANSACTION AT:  ");
-        System.out.println(LocalDateTime.now());;
+        System.out.println("\n\n ******************************************  CREATES TRANSACTION AT:  " + LocalDateTime.now());
+        blockchainRepository.createTransaction(parcel.toString());
+        System.out.println("\n\n ******************************************  ENDS TRANSACTION AT:  " + LocalDateTime.now());
 
         return shipmentID;
     }
