@@ -2,7 +2,6 @@ package com.testgroup.api;
 
 import com.testgroup.blockchain.BlockchainRepository;
 import com.testgroup.domain.*;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,7 +36,7 @@ public class SendingService {
                 request.getRecipientId(), parcel.getParcelType()));
 
         System.out.println("\n\n ******************************************  CREATES TRANSACTION AT:  " + LocalDateTime.now());
-        blockchainRepository.createTransaction(parcel.toString());
+        blockchainRepository.addParcel(parcel.toString());
         System.out.println("\n\n ******************************************  ENDS TRANSACTION AT:  " + LocalDateTime.now());
 
         return shipmentID;

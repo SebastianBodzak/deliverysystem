@@ -17,8 +17,8 @@ public class LocalUserRepository implements UserRepository {
     private EntityManager entityManager;
 
     @Override
-    public User load(Long senderId) {
-        return entityManager.find(User.class, senderId);
+    public User load(Long userId) {
+        return entityManager.find(User.class, userId);
     }
 
     @Override

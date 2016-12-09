@@ -44,4 +44,8 @@ public class User {
                 ", address='" + address + '\'' +
                 '}';
     }
+
+    public String getName() {
+        return firstName + " " + lastName;
+    }
 }
