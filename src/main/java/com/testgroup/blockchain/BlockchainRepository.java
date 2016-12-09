@@ -4,7 +4,6 @@ import org.ethereum.config.SystemProperties;
 import org.ethereum.config.blockchain.FrontierConfig;
 import org.ethereum.util.blockchain.SolidityContract;
 import org.ethereum.util.blockchain.StandaloneBlockchain;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigInteger;
 
@@ -47,18 +46,17 @@ public class BlockchainRepository {
 
 
     private void printInfoAfterCreatingBlock() {
-        System.out.println("######################################################### BLOCKCHAIN \n\n" +blockchain.getBlockchain() + "\n" +
+        System.out.println("######################################################### BLOCKCHAIN \n\n" + blockchain.getBlockchain() + "\n" +
                 "\n######################################################### ");
-        System.out.println("######################################################### BEST BLOCK: \n\n" +blockchain.getBlockchain().getBestBlock() + "\n" +
+        System.out.println("######################################################### BEST BLOCK: \n\n" + blockchain.getBlockchain().getBestBlock() + "\n" +
                 "\n######################################################### ");
     }
 
     private void printInfoBeforeCreatingBlock() {
-        System.out.println("######################################################### BEST BLOCK BEFORE: \n\n" +blockchain.getBlockchain().getBestBlock() + "\n" +
+        System.out.println("######################################################### BEST BLOCK BEFORE: \n\n" + blockchain.getBlockchain().getBestBlock() + "\n" +
                 "\n######################################################### ");
     }
 
-//    @Transactional
     public void createTransaction(String parcel) {
         printInfoBeforeCreatingBlock();
         blockchain.createBlock();

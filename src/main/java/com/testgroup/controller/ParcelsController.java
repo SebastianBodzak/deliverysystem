@@ -2,7 +2,6 @@ package com.testgroup.controller;
 
 import com.testgroup.api.CreateParcelRequest;
 import com.testgroup.api.SendingService;
-import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,10 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/parcels")
-@AllArgsConstructor
 public class ParcelsController {
 
     private SendingService sendingService;
+
+    public ParcelsController(SendingService sendingService) {
+        this.sendingService = sendingService;
+    }
 
     @PutMapping("/add")
     public Long add(@RequestBody CreateParcelRequest request) {
