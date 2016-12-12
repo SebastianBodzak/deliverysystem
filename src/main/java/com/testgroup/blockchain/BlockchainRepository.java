@@ -6,12 +6,15 @@ import org.ethereum.config.blockchain.FrontierConfig;
 import org.ethereum.util.blockchain.SolidityCallResult;
 import org.ethereum.util.blockchain.SolidityContract;
 import org.ethereum.util.blockchain.StandaloneBlockchain;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
 
 /**
  * @author beata.ilowiecka@impaqgroup.com on 07.12.16.
  */
+@Component
 public class BlockchainRepository {
 
     private final SolidityContract parcelContract;
@@ -70,6 +73,12 @@ public class BlockchainRepository {
         printInfo("BEST BLOCK AFTER CREATING PARCEL CONTRACT");
         this.usersContract = blockchain.submitNewContract(USERS_CONTRACT);
         printInfo("BEST BLOCK AFTER CREATING USERS CONTRACT");
+    }
+
+//    @Autowired
+    public BlockchainRepository(){
+        parcelContract = null;
+        usersContract = null;
     }
 
     private void printInfo(String about) {

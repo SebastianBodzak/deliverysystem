@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @author beata.ilowiecka@impaqgroup.com on 08.12.16.
  */
-@Configuration
+//@Configuration
 public class BlockchainConfig {
 
     @Bean
