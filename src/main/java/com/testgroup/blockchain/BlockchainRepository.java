@@ -32,7 +32,7 @@ public class BlockchainRepository {
                     "    return data;" +
                     "  }" +
                     "}";
-    private static final String USERS_CONTRACT =
+    public static final String USERS_CONTRACT =
             "contract usernameStorage{\n\n" +
 
                     "    mapping (uint => string) userNames;\n\n" +

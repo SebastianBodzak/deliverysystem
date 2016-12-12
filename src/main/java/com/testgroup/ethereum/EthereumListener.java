@@ -12,10 +12,12 @@ import java.util.List;
 public class EthereumListener extends EthereumListenerAdapter {
 
     Ethereum ethereum;
+    EthereumBean ethereumBean;
     private boolean syncDone = false;
 
-    public EthereumListener(Ethereum ethereum) {
+    public EthereumListener(Ethereum ethereum, EthereumBean ethereumBean) {
         this.ethereum = ethereum;
+        this.ethereumBean = ethereumBean;
     }
 
     @Override
@@ -37,6 +39,7 @@ public class EthereumListener extends EthereumListenerAdapter {
     public void onSyncDone() {
         System.out.println(" ** SYNC DONE ** ");
         syncDone = true;
+        ethereumBean.loadFirstContract();
     }
 
     /**
