@@ -17,7 +17,7 @@ public class EMinerListener implements MinerListener {
 
     @Override
     public void miningStarted() {
-        log.info("Miner started");
+        log.info("Mining started by miner: " + miner);
 //        System.out.println("Miner started");
     }
 

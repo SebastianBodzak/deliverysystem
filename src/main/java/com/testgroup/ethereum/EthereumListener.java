@@ -23,7 +23,7 @@ public class EthereumListener extends EthereumListenerAdapter {
     @Override
     public void onBlock(Block block, List<TransactionReceipt> receipts) {
         System.out.println();
-        System.out.println("Do something on block: " + block.getNumber());
+        System.out.println("### Do something on block: " + block.getNumber());
 
         if (syncDone)
             calcNetHashRate(block);

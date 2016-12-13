@@ -9,17 +9,19 @@ import org.ethereum.solidity.compiler.CompilationResult;
 import org.ethereum.solidity.compiler.SolidityCompiler;
 import org.ethereum.util.ByteUtil;
 import org.spongycastle.util.encoders.Hex;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
-import java.io.InterruptedIOException;
 import java.math.BigInteger;
+
+import static com.testgroup.blockchain.BlockchainRepository.USERS_CONTRACT;
 
 @Slf4j
 public class ContractLoader {
-    private Ethereum ethereum;
 
-    public final static String SENDER_PRIVATE_KEY_STR = "f67c4032a7ff79bbfa7a780331b235c4eb681d51a0704cb1562064fb6c4bced5";
+    private Ethereum ethereum;
+    private boolean contractInstalled = false;
+
+    public final static String SENDER_PRIVATE_KEY_STR = "f67c4032a7ff79bbfa7a780331b235c4eb681d51a0704cb1562064fb6c4bced7";
     protected final byte[] senderPrivateKey = Hex.decode(SENDER_PRIVATE_KEY_STR);
     protected final byte[] senderAddress = ECKey.fromPrivate(senderPrivateKey).getAddress();
 
@@ -27,8 +29,19 @@ public class ContractLoader {
         this.ethereum = ethereum;
     }
 
-    public void loadContractIntoEthereum(String contractDefinition) throws IOException, InterruptedException {
+    public void loadUsersContract() {
+        if (!contractInstalled) {
+            try {
+                System.out.println("### loading first contract");
+                loadContractIntoEthereum(USERS_CONTRACT);
+                contractInstalled = true;
+            } catch (Exception e) {
 
+            }
+        }
+    }
+
+    public void loadContractIntoEthereum(String contractDefinition) throws IOException, InterruptedException {
         log.info("Compiling contract...");
         SolidityCompiler.Result result = SolidityCompiler.compile(contractDefinition.getBytes(), true,
                 SolidityCompiler.Options.ABI, SolidityCompiler.Options.BIN);
@@ -49,7 +62,6 @@ public class ContractLoader {
     }
 
     protected TransactionReceipt sendTxAndWait(byte[] receiveAddress, byte[] data) throws InterruptedException {
-
         BigInteger nonce = ethereum.getRepository().getNonce(senderAddress);
         Transaction tx = new Transaction(
                 ByteUtil.bigIntegerToBytes(nonce),
