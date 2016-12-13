@@ -33,15 +33,7 @@ public class EthereumBean {
         System.out.println("### Total dificulty: "+ethereum.getBlockchain().getTotalDifficulty());
         System.out.println(ethereum.getBlockchain().getBestBlock());
         ethereum.getBlockMiner().startMining();
-        if(! contractInstalled){
-            try {
-                System.out.println("### loading first contract");
-                contractLoader.loadContractIntoEthereum(USERS_CONTRACT);
-                contractInstalled = true;
-            } catch (Exception e) {
-
-            }
-        }
+        loadContract();
     }
 
     public String getBestBlock() {
@@ -50,6 +42,10 @@ public class EthereumBean {
 
     public void loadFirstContract(){
         System.out.println("### loading contract from other place");
+        loadContract();
+    }
+
+    private void loadContract() {
         if(! contractInstalled){
             try {
                 System.out.println("### loading first contract");
