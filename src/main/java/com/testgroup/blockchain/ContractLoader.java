@@ -1,11 +1,13 @@
 package com.testgroup.blockchain;
 
 import lombok.extern.slf4j.Slf4j;
+import org.ethereum.core.Block;
 import org.ethereum.core.Transaction;
 import org.ethereum.core.TransactionReceipt;
 import org.ethereum.crypto.ECKey;
 import org.ethereum.db.ByteArrayWrapper;
 import org.ethereum.facade.Ethereum;
+import org.ethereum.listener.EthereumListenerAdapter;
 import org.ethereum.solidity.compiler.CompilationResult;
 import org.ethereum.solidity.compiler.SolidityCompiler;
 import org.ethereum.util.ByteUtil;
@@ -15,6 +17,7 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.testgroup.blockchain.BlockchainRepository.USERS_CONTRACT;
@@ -29,8 +32,7 @@ public class ContractLoader {
     protected final byte[] senderPrivateKey = Hex.decode(SENDER_PRIVATE_KEY_STR);
     protected final byte[] senderAddress = ECKey.fromPrivate(senderPrivateKey).getAddress();
 
-    private Map<ByteArrayWrapper, TransactionReceipt> txWaiters =
-            Collections.synchronizedMap(new HashMap<ByteArrayWrapper, TransactionReceipt>());
+    private Map<ByteArrayWrapper, TransactionReceipt> txWaiters = Collections.synchronizedMap(new HashMap<>());
 
     public ContractLoader(Ethereum ethereum) {
         this.ethereum = ethereum;
@@ -40,10 +42,29 @@ public class ContractLoader {
         if (!contractInstalled) {
             try {
                 System.out.println("### loading first contract");
-                loadContractIntoEthereum(USERS_CONTRACT);
                 contractInstalled = true;
+                ethereum.addListener(new EthereumListenerAdapter() {
+                    @Override
+                    public void onBlock(Block block, List<TransactionReceipt> receipts) {
+                        ContractLoader.this.onBlock(block, receipts);
+                    }
+                });
+                loadContractIntoEthereum(USERS_CONTRACT);
+
             } catch (Exception e) {
 
+            }
+        }
+    }
+
+    private void onBlock(Block block, List<TransactionReceipt> receipts) {
+        for (TransactionReceipt receipt : receipts) {
+            ByteArrayWrapper txHashW = new ByteArrayWrapper(receipt.getTransaction().getHash());
+            if (txWaiters.containsKey(txHashW)) {
+                txWaiters.put(txHashW, receipt);
+                synchronized (this) {
+                    notifyAll();
+                }
             }
         }
     }
@@ -97,12 +118,8 @@ public class ContractLoader {
                 return receipt;
             } else {
                 long curBlock = ethereum.getBlockchain().getBestBlock().getNumber();
-                if (curBlock > startBlock + 16) {
-                    throw new RuntimeException("The transaction was not included during last 16 blocks: " + txHashW.toString().substring(0,8));
-                } else {
-                    log.info("Waiting for block with transaction 0x" + txHashW.toString().substring(0,8) +
+                log.info("Waiting for block with transaction 0x" + txHashW.toString().substring(0,8) +
                             " included (" + (curBlock - startBlock) + " blocks received so far) ...");
-                }
             }
             synchronized (this) {
                 wait(20000);

@@ -28,7 +28,7 @@ public class EthereumBean {
     private void setupMiner() {
         ethereum.getBlockMiner().addListener(new EMinerListener(ethereum.getBlockMiner()));
         ethereum.getBlockMiner().setMinGasPrice(BigInteger.ZERO);
-        ethereum.getBlockMiner().setCpuThreads(2);
+//        ethereum.getBlockMiner().setCpuThreads(2);
         printBlockchainInfo();
         ethereum.getBlockMiner().startMining();
     }
