@@ -13,16 +13,11 @@ import java.time.LocalDateTime;
 @Service
 public class SendingService {
 
-    private UserRepository userRepository;
     private ShipmentRegistry shipmentRegistry;
-    private ParcelRepository parcelRepository;
     private BlockchainRepository blockchainRepository;
 
-    public SendingService(UserRepository userRepository, ShipmentRegistry shipmentRegistry,
-                          ParcelRepository parcelRepository, BlockchainRepository blockchainRepository) {
-        this.userRepository = userRepository;
+    public SendingService(ShipmentRegistry shipmentRegistry, BlockchainRepository blockchainRepository) {
         this.shipmentRegistry = shipmentRegistry;
-        this.parcelRepository = parcelRepository;
         this.blockchainRepository = blockchainRepository;
     }
 

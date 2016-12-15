@@ -1,6 +1,5 @@
 package com.testgroup.blockchain;
 
-import org.ethereum.util.blockchain.StandaloneBlockchain;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

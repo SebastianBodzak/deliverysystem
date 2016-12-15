@@ -58,11 +58,4 @@ public class Parcel {
                 ", overwrittenRecipient='" + overwrittenRecipient + '\'' +
                 '}';
     }
-
-    public String getSender() {
-        return sender.getName();
-    }
-    public String getRecipient() {
-        return recipient.getName();
-    }
 }

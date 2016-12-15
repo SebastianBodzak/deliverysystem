@@ -21,9 +21,6 @@ public class Shipment {
 
     private ParcelType parcelType;
 
-    @OneToOne
-    private User miner;
-
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
@@ -32,7 +29,6 @@ public class Shipment {
     public Shipment(Long parcelId, Long senderId, Long recipientId, ParcelType parcelType) {
         this.parcelId = parcelId;
         this.date = new Date();
-        this.miner = null; //mock
         this.senderId = senderId;
         this.recipientId = recipientId;
         this.parcelType = parcelType;
@@ -54,7 +50,6 @@ public class Shipment {
                 ", senderId=" + senderId +
                 ", recipientId=" + recipientId +
                 ", parcelType=" + parcelType +
-                ", miner=" + miner +
                 ", date=" + date +
                 '}';
     }
