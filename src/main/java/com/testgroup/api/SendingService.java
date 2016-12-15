@@ -1,5 +1,8 @@
 package com.testgroup.api;
 
+import com.testgroup.api.dtos.CreateParcelRequest;
+import com.testgroup.api.dtos.IdsParcelResponse;
+import com.testgroup.api.dtos.StringParcelResponse;
 import com.testgroup.blockchain.BlockchainRepository;
 import com.testgroup.domain.ParcelType;
 import org.springframework.stereotype.Service;
@@ -40,8 +43,8 @@ public class SendingService {
         return new StringParcelResponse(sender, recipient, committedBy, connectedPersonId, parcelType, commitTimestamp);
     }
 
-    public IdsParcelResponse getParcelIds(Long id) {
-        byte[] parcelAsIds = blockchainRepository.getParcelIds(id);
+    public IdsParcelResponse getParcelDataIds(Long id) {
+        byte[] parcelAsIds = blockchainRepository.getParcelDataIds(id);
         Long senderId = null;
         Long receiverId = null;
         Long connectedPersonId = null;
@@ -49,5 +52,9 @@ public class SendingService {
         LocalDateTime commitTimestamp = null;
         String parcelType = null;
         return new IdsParcelResponse(senderId, receiverId, connectedPersonId, committedById, commitTimestamp, parcelType);
+    }
+
+    public Object[] getParcelIdsBySender(String name) {
+        return blockchainRepository.getParcelIdsBySender(name);
     }
 }

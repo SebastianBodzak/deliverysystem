@@ -1,4 +1,4 @@
-package com.testgroup.api;
+package com.testgroup.api.dtos;
 
 import lombok.AllArgsConstructor;
 
@@ -13,7 +13,8 @@ public class CreateParcelRequest {
     private ParcelDto parcel;
     private File attachment;
 
-    public void validate() {}
+    public void validate() {
+    }
 
     public String getSender() {
         return parcel.getSender();

@@ -1,6 +1,9 @@
 package com.testgroup.controller;
 
 import com.testgroup.api.*;
+import com.testgroup.api.dtos.CreateParcelRequest;
+import com.testgroup.api.dtos.IdsParcelResponse;
+import com.testgroup.api.dtos.StringParcelResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
@@ -37,6 +40,11 @@ public class ParcelsController {
 
     @GetMapping("/asIds/{id}")
     public IdsParcelResponse geParcelAsIds(@PathVariable Long id) {
-        return sendingService.getParcelIds(id);
+        return sendingService.getParcelDataIds(id);
+    }
+
+    @GetMapping("/{name}")
+    public Object[] getParcelIdsBySenderName(@PathVariable String name) {
+        return sendingService.getParcelIdsBySender(name);
     }
 }
