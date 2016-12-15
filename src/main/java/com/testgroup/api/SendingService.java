@@ -45,13 +45,8 @@ public class SendingService {
 
     public IdsParcelResponse getParcelDataIds(Long id) {
         byte[] parcelAsIds = blockchainRepository.getParcelDataIds(id);
-        Long senderId = null;
-        Long receiverId = null;
-        Long connectedPersonId = null;
-        Long committedById = null;
-        LocalDateTime commitTimestamp = null;
-        String parcelType = null;
-        return new IdsParcelResponse(senderId, receiverId, connectedPersonId, committedById, commitTimestamp, parcelType);
+
+        return new IdsParcelResponse(parcelAsIds);
     }
 
     public Object[] getParcelIdsBySender(String name) {

@@ -1,6 +1,12 @@
 package com.testgroup.api.dtos;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Date;
+
+import static com.testgroup.api.dtos.ByteUtils.bytesToInt;
+import static com.testgroup.domain.ParcelType.toParcelType;
 
 /**
  * @author beata.ilowiecka@impaqgroup.com on 15.12.16.
@@ -11,16 +17,35 @@ public class IdsParcelResponse {
     private Long receiverId;
     private Long connectedPersonId;
     private Long committedById;
-    private LocalDateTime commitTimestamp;
-    private String parcelType;
+    private Long commitTimestamp;
 
-    public IdsParcelResponse(Long senderId, Long receiverId, Long connectedPersonId, Long committedById, LocalDateTime commitTimestamp, String parcelType) {
+
+
+    private String parcelType;
+    private String commitDate;
+
+    public static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+
+    public IdsParcelResponse(Long senderId, Long receiverId, Long connectedPersonId, Long committedById, Long commitTimestamp, String parcelType) {
         this.senderId = senderId;
         this.receiverId = receiverId;
         this.connectedPersonId = connectedPersonId;
         this.committedById = committedById;
         this.commitTimestamp = commitTimestamp;
         this.parcelType = parcelType;
+    }
+
+    public IdsParcelResponse(byte[] parcelAsIds){
+        if(parcelAsIds.length >= 41) {
+            senderId = ByteUtils.bytesToLong(Arrays.copyOfRange(parcelAsIds, 0, 8));
+            receiverId = ByteUtils.bytesToLong(Arrays.copyOfRange(parcelAsIds, 8, 16));
+            connectedPersonId = ByteUtils.bytesToLong(Arrays.copyOfRange(parcelAsIds, 16, 24));
+            committedById = ByteUtils.bytesToLong(Arrays.copyOfRange(parcelAsIds, 24, 32));
+            commitTimestamp = ByteUtils.bytesToLong(Arrays.copyOfRange(parcelAsIds, 32, 40));
+            commitDate = dateFormat.format(new Date(commitTimestamp * 1000));
+            parcelType = toParcelType(bytesToInt(Arrays.copyOfRange(parcelAsIds, 40, 41)));
+        }
     }
 
     public Long getSenderId() {
@@ -55,11 +80,11 @@ public class IdsParcelResponse {
         this.committedById = committedById;
     }
 
-    public LocalDateTime getCommitTimestamp() {
+    public Long getCommitTimestamp() {
         return commitTimestamp;
     }
 
-    public void setCommitTimestamp(LocalDateTime commitTimestamp) {
+    public void setCommitTimestamp(Long commitTimestamp) {
         this.commitTimestamp = commitTimestamp;
     }
 
@@ -69,5 +94,13 @@ public class IdsParcelResponse {
 
     public void setParcelType(String parcelType) {
         this.parcelType = parcelType;
+    }
+
+    public String getCommitDate() {
+        return commitDate;
+    }
+
+    public void setCommitDate(String commitDate) {
+        this.commitDate = commitDate;
     }
 }

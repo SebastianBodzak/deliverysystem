@@ -8,6 +8,9 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 
+import static com.testgroup.api.dtos.ByteUtils.bytesToInt;
+import static com.testgroup.domain.ParcelType.toParcelType;
+
 /**
  * @author beata.ilowiecka@impaqgroup.com on 15.12.16.
  */
@@ -25,31 +28,19 @@ public class StringParcelResponse {
 
     public StringParcelResponse(String unparsedResponse) {
         String[] responseLines = unparsedResponse.split("\n");
-        sender = responseLines[0];
-        recipient = responseLines[1];
-        connectedPerson = responseLines[2];
-        committedBy = responseLines[3];
-        parcelType = toParcelType(bytesToInt( responseLines[5].getBytes() ));
+        if(responseLines.length == 6) {
+            sender = responseLines[0];
+            recipient = responseLines[1];
+            connectedPerson = responseLines[2];
+            committedBy = responseLines[3];
+            parcelType = toParcelType(bytesToInt(responseLines[5].getBytes()));
+        }
     }
+
+
 
     public static SimpleDateFormat getDateFormat() {
         return dateFormat;
-    }
-
-    private String toParcelType(int parcelTypeNr) {
-        ParcelType type ;
-        switch (parcelTypeNr){
-            case 0 : type = ParcelType.LETTER;
-                     break;
-            case 1 : type = ParcelType.PACK;
-                     break;
-            case 2 : type = ParcelType.INVOICE;
-                     break;
-            case 3 : type = ParcelType.EMAIL;
-                     break;
-            default : throw new IllegalArgumentException("undefined parcel type");
-        }
-        return type.toString();
     }
 
     public String getSender() {
@@ -111,15 +102,7 @@ public class StringParcelResponse {
         System.out.println( "timestamp now: "+ (new Date().getTime()));
         return buffer.getLong();
     }
-    private int bytesToInt(byte[] bytes) {
-        ByteBuffer buffer = ByteBuffer.allocate(Integer.BYTES);
-        int bytesLeft = Integer.BYTES - bytes.length;
-        buffer.put(new byte[bytesLeft]);
-        buffer.put(bytes);
 
-        buffer.flip();//need flip
-        return buffer.getInt();
-    }
 
     public String getCommitTimestamp() {
         return commitTimestamp;
