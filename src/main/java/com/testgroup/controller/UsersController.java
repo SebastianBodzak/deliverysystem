@@ -27,4 +27,9 @@ public class UsersController {
     public BigInteger getByName(@RequestParam("fullName") String fullName) {
         return userService.getByName(fullName);
     }
+
+    @GetMapping("/count")
+    public BigInteger count() {
+        return userService.count();
+    }
 }

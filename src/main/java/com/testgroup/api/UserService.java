@@ -42,4 +42,9 @@ public class UserService {
     public BigInteger getByName(String fullName) {
         return blockchainRepository.getUserByName(fullName);
     }
+
+    @Transactional
+    public BigInteger count() {
+        return blockchainRepository.count();
+    }
 }
