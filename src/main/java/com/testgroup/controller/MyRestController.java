@@ -15,7 +15,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 public class MyRestController {
 
     @Autowired
-    EthereumBean ethereumBean;
+    private EthereumBean ethereumBean;
 
     @RequestMapping(value = "/bestBlock", method = GET, produces = APPLICATION_JSON_VALUE)
     @ResponseBody

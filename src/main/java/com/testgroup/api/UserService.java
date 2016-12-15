@@ -31,8 +31,8 @@ public class UserService {
         return 0L;
     }
 
-    public String getUser(Long id) {
-//        return blockchainRepository.getUser(id);
-        return "";
+    @Transactional
+    public String getById(Long id) {
+        return blockchainRepository.getUserById(id);
     }
 }

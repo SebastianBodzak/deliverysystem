@@ -232,10 +232,9 @@ public class BlockchainRepository {
 //        return returnedValue.longValue();
 //    }
 //
-//    public String getUser(Long id) {
-//        SolidityCallResult userData = usersContract.callFunction("getUsername", id);
-//        return (String) userData.getReturnValue();
-//    }
+    public String getUserById(Long id) {
+        return (String) contract.callFunction("getUsername", id).getReturnValue();
+    }
 
     public BigInteger getParcelsCount() {
         return (BigInteger) contract.callFunction("getParcelsCount").getReturnValue();
