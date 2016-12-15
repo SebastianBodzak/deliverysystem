@@ -2,7 +2,6 @@ package com.testgroup.api;
 
 import com.testgroup.blockchain.BlockchainRepository;
 import com.testgroup.domain.ParcelType;
-import com.testgroup.domain.ShipmentRegistry;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,11 +13,9 @@ import java.time.LocalDateTime;
 @Service
 public class SendingService {
 
-    private ShipmentRegistry shipmentRegistry;
     private BlockchainRepository blockchainRepository;
 
-    public SendingService(ShipmentRegistry shipmentRegistry, BlockchainRepository blockchainRepository) {
-        this.shipmentRegistry = shipmentRegistry;
+    public SendingService(BlockchainRepository blockchainRepository) {
         this.blockchainRepository = blockchainRepository;
     }
 

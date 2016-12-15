@@ -1,8 +1,6 @@
 package com.testgroup.api;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.File;
 
