@@ -44,7 +44,7 @@ public class DataLoaderInitialization implements ApplicationRunner {
         Shipment secondShipment = new Shipment(2L, 1L, 3L, LETTER);
         Shipment thirdShipment = new Shipment(3L, 2L, 3L, LETTER);
         Shipment fourthShipment = new Shipment(4L, 2L, 3L, EMAIL);
-        Shipment fifthShipment = new Shipment(5L, 3L, 2L, PACKAGE);
+        Shipment fifthShipment = new Shipment(5L, 3L, 2L, PACK);
 
         Calendar calendar = new GregorianCalendar(2013,1,28,13,24);
         Calendar calendar2 = new GregorianCalendar(2014,6,28,13,24);

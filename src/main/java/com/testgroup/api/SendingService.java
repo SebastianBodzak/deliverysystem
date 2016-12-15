@@ -36,7 +36,7 @@ public class SendingService {
                 request.getRecipientId(), parcel.getParcelType()));
 
         System.out.println("\n\n ******************************************  CREATES TRANSACTION AT:  " + LocalDateTime.now());
-        blockchainRepository.addParcel(parcel.toString());
+        blockchainRepository.addParcel(parcel.getSender(), parcel.getRecipient(), "", parcel.getParcelType().getNumber());
         System.out.println("\n\n ******************************************  ENDS TRANSACTION AT:  " + LocalDateTime.now());
 
         return shipmentID;

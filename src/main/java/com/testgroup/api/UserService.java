@@ -27,10 +27,12 @@ public class UserService {
         Long userId = userRepository.save(user);
         User loadedUser = userRepository.load(userId);
 
-        return blockchainRepository.addUser(loadedUser);
+//        return blockchainRepository.addUser(loadedUser);
+        return 0L;
     }
 
     public String getUser(Long id) {
-        return blockchainRepository.getUser(id);
+//        return blockchainRepository.getUser(id);
+        return "";
     }
 }

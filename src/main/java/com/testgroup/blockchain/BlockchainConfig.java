@@ -11,9 +11,7 @@ import org.springframework.context.annotation.Configuration;
 public class BlockchainConfig {
 
     @Bean
-    public BlockchainRepository standaloneBlockChain() {
-        StandaloneBlockchain bc = new StandaloneBlockchain().withAutoblock(true);
-
-        return new BlockchainRepository(bc);
+    public BlockchainRepository blockchainRepository() {
+        return new BlockchainRepository();
     }
 }
