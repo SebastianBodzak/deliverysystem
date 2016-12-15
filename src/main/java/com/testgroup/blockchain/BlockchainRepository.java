@@ -236,4 +236,8 @@ public class BlockchainRepository {
 //        SolidityCallResult userData = usersContract.callFunction("getUsername", id);
 //        return (String) userData.getReturnValue();
 //    }
+
+    public BigInteger getParcelsCount() {
+        return (BigInteger) contract.callFunction("getParcelsCount").getReturnValue();
+    }
 }
