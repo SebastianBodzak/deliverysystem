@@ -31,4 +31,9 @@ public class ParcelsController {
     public BigInteger getParcelsCount() {
         return packageInformationReceiver.getParcelsCount();
     }
+
+//    @GetMapping("/string/{id}")
+//    public StringParcelResponse geParcelAsString(@PathVariable Long id) {
+//
+//    }
 }

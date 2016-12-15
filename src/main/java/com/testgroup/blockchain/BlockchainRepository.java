@@ -215,9 +215,12 @@ public class BlockchainRepository {
                 "\n######################################################### ");
     }
 
-    public void addParcel(String sender, String recipient, String committedBy, int parcelTypeId) {
-        contract.callFunction("addParcel", sender, recipient, committedBy, parcelTypeId);
+    public Long addParcel(String sender, String recipient, String committedBy, int parcelTypeId) {
+//        System.out.println("wanna send: "+sender +", "+recipient+", "+committedBy+", "+parcelTypeId);
+        SolidityCallResult result = contract.callFunction("addParcel", sender, recipient, committedBy, parcelTypeId);
         printInfo("BEST BLOCK AFTER CALLING FUNCTION CREATE PARCEL");
+        BigInteger parcelId = (BigInteger) result.getReturnValue();
+        return parcelId.longValue();
     }
 
     private void printContract() {

@@ -17,20 +17,24 @@ public class CreateParcelRequest {
 
     public void validate() {}
 
+    public String getSender() {
+        return parcel.getSender();
+    }
+
+    public String getRecipient() {
+        return parcel.getRecipient();
+    }
+
+    public String getCommitedBy() {
+        return parcel.getCommittedBy();
+    }
+
     public String getConent() {
         return parcel.getContent();
     }
 
     public String getParcelType() {
         return parcel.getParcelType();
-    }
-
-    public Long getSenderId() {
-        return parcel.getSender();
-    }
-
-    public Long getRecipientId() {
-        return parcel.getRecipient();
     }
 
     public String getOverwriteRecipient() {

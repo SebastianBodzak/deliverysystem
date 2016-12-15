@@ -10,26 +10,35 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ParcelDto {
 
-    private Long sender; //beacuse lack of sessions
-    private Long recipient;
+    private String sender;
+    private String recipient;
+    private String committedBy;
     private String parcelType;
     private String content;
     private String overwriteRecipientData;
 
-    public Long getSender() {
+    public String getSender() {
         return sender;
     }
 
-    public void setSender(Long sender) {
+    public void setSender(String sender) {
         this.sender = sender;
     }
 
-    public Long getRecipient() {
+    public String getRecipient() {
         return recipient;
     }
 
-    public void setRecipient(Long recipient) {
+    public void setRecipient(String recipient) {
         this.recipient = recipient;
+    }
+
+    public String getCommittedBy() {
+        return committedBy;
+    }
+
+    public void setCommittedBy(String committedBy) {
+        this.committedBy = committedBy;
     }
 
     public String getParcelType() {

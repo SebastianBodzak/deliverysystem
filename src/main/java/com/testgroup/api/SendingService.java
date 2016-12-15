@@ -28,18 +28,12 @@ public class SendingService {
 
     @Transactional
     public Long addParcel(CreateParcelRequest request) {
-        User sender = userRepository.load(request.getSenderId());
-        User recipient = userRepository.load(request.getRecipientId());
-        Parcel parcel = createParcel(request, sender, recipient);
-        Long parcelId = parcelRepository.save(parcel);
-        Long shipmentID = shipmentRegistry.save(new Shipment(parcelId, request.getSenderId(),
-                request.getRecipientId(), parcel.getParcelType()));
-
         System.out.println("\n\n ******************************************  CREATES TRANSACTION AT:  " + LocalDateTime.now());
-        blockchainRepository.addParcel(parcel.getSender(), parcel.getRecipient(), "", parcel.getParcelType().getNumber());
+        Long parcelId = blockchainRepository.addParcel(request.getSender(), request.getRecipient(), request.getCommitedBy(),
+                ParcelType.valueOf(request.getParcelType()).getNumber());
         System.out.println("\n\n ******************************************  ENDS TRANSACTION AT:  " + LocalDateTime.now());
 
-        return shipmentID;
+        return parcelId;
     }
 
     private Parcel createParcel(CreateParcelRequest request, User recipient, User sender) {
