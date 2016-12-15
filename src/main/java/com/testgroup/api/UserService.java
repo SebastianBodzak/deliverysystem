@@ -6,6 +6,8 @@ import com.testgroup.domain.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigInteger;
+
 /**
  * @author beata.ilowiecka@impaqgroup.com on 09.12.16.
  */
@@ -34,5 +36,10 @@ public class UserService {
     @Transactional
     public String getById(Long id) {
         return blockchainRepository.getUserById(id);
+    }
+
+    @Transactional
+    public BigInteger getByName(String fullName) {
+        return blockchainRepository.getUserByName(fullName);
     }
 }

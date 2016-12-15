@@ -1,10 +1,9 @@
 package com.testgroup.controller;
 
 import com.testgroup.api.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigInteger;
 
 /**
  * @author beata.ilowiecka@impaqgroup.com on 09.12.16.
@@ -22,5 +21,10 @@ public class UsersController {
     @GetMapping("/{id}")
     public String getById(@PathVariable Long id) {
         return userService.getById(id);
+    }
+
+    @GetMapping("/name")
+    public BigInteger getByName(@RequestParam("fullName") String fullName) {
+        return userService.getByName(fullName);
     }
 }
