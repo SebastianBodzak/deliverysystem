@@ -1,8 +1,10 @@
 package com.testgroup.api;
 
+import com.testgroup.api.dtos.CreateParcelRequest;
+import com.testgroup.api.dtos.IdsParcelResponse;
+import com.testgroup.api.dtos.StringParcelResponse;
 import com.testgroup.blockchain.BlockchainRepository;
 import com.testgroup.domain.ParcelType;
-import com.testgroup.domain.ShipmentRegistry;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,11 +16,9 @@ import java.time.LocalDateTime;
 @Service
 public class SendingService {
 
-    private ShipmentRegistry shipmentRegistry;
     private BlockchainRepository blockchainRepository;
 
-    public SendingService(ShipmentRegistry shipmentRegistry, BlockchainRepository blockchainRepository) {
-        this.shipmentRegistry = shipmentRegistry;
+    public SendingService(BlockchainRepository blockchainRepository) {
         this.blockchainRepository = blockchainRepository;
     }
 
@@ -41,5 +41,20 @@ public class SendingService {
 //        String parcelType = parcelAsString.substring(0);
 //        LocalDateTime commitTimestamp = LocalDateTime.parse(parcelAsString.substring(0));
         return new StringParcelResponse(parcelAsString);
+    }
+
+    public IdsParcelResponse getParcelDataIds(Long id) {
+        byte[] parcelAsIds = blockchainRepository.getParcelDataIds(id);
+        Long senderId = null;
+        Long receiverId = null;
+        Long connectedPersonId = null;
+        Long committedById = null;
+        LocalDateTime commitTimestamp = null;
+        String parcelType = null;
+        return new IdsParcelResponse(senderId, receiverId, connectedPersonId, committedById, commitTimestamp, parcelType);
+    }
+
+    public Object[] getParcelIdsBySender(String name) {
+        return blockchainRepository.getParcelIdsBySender(name);
     }
 }

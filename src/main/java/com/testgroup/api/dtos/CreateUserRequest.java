@@ -1,4 +1,4 @@
-package com.testgroup.api;
+package com.testgroup.api.dtos;
 
 /**
  * @author beata.ilowiecka@impaqgroup.com on 09.12.16.

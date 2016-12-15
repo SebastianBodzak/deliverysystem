@@ -1,8 +1,5 @@
 package com.testgroup.blockchain;
 
-import com.testgroup.api.StringParcelResponse;
-import com.testgroup.domain.ParcelType;
-import com.testgroup.domain.User;
 import org.ethereum.config.SystemProperties;
 import org.ethereum.config.blockchain.FrontierConfig;
 import org.ethereum.util.blockchain.SolidityCallResult;
@@ -224,32 +221,28 @@ public class BlockchainRepository {
         return parcelId.longValue();
     }
 
-    private void printContract() {
-        System.out.println("\n\n######################################################### CALLING CONTRACT FUNCTION: \n\n" +
-                contract + "\n" +
-                "\n######################################################### ");
-    }
-//
-//    public Long addUser(User user) {
-//        SolidityCallResult result = usersContract.callFunction("getUserId", user.getName());
-//        BigInteger returnedValue = (BigInteger) result.getReturnValue();
-//        return returnedValue.longValue();
-//    }
-//
-    public String getUserById(Long id) {
-        return (String) contract.callFunction("getUsername", id).getReturnValue();
+    public Object[] getParcelIdsBySender(String name) {
+        return (Object[]) contract.callFunction("findParcelIdsBySender", name).getReturnValue();
     }
 
-    public BigInteger getParcelsCount() {
-        return (BigInteger) contract.callFunction("getParcelsCount").getReturnValue();
+    public byte[] getParcelDataIds(Long id) {
+        return (byte[]) contract.callFunction("getParcelAsIds", id).getReturnValue();
     }
 
     public String getParcelAsString(Long id) {
         return (String) contract.callFunction("getParcelAsString", id).getReturnValue();
     }
 
+    public BigInteger getParcelsCount() {
+        return (BigInteger) contract.callFunction("getParcelsCount").getReturnValue();
+    }
+
     public BigInteger getUserByName(String userFullName) {
         return (BigInteger) contract.callFunction("getUserId", userFullName).getReturnValue();
+    }
+
+    public String getUserById(Long id) {
+        return (String) contract.callFunction("getUsername", id).getReturnValue();
     }
 
     public BigInteger count() {

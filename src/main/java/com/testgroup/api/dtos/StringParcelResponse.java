@@ -1,4 +1,4 @@
-package com.testgroup.api;
+package com.testgroup.api.dtos;
 
 import com.testgroup.domain.ParcelType;
 
