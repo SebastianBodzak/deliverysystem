@@ -1,4 +1,4 @@
-package com.testgroup.controller;
+package com.testgroup.api;
 
 import java.time.LocalDateTime;
 

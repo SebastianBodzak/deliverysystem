@@ -1,9 +1,6 @@
 package com.testgroup.controller;
 
-import com.testgroup.api.CreateParcelRequest;
-import com.testgroup.api.PackageInformationReceiver;
-import com.testgroup.api.SendingService;
-import com.testgroup.api.StringParcelResponse;
+import com.testgroup.api.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;

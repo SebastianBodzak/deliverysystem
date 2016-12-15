@@ -1,7 +1,6 @@
 package com.testgroup.api;
 
 import com.testgroup.blockchain.BlockchainRepository;
-import com.testgroup.controller.IdsParcelResponse;
 import com.testgroup.domain.ParcelType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
