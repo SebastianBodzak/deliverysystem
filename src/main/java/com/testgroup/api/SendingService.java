@@ -34,12 +34,6 @@ public class SendingService {
 
     public StringParcelResponse getStringParcel(Long id) {
         String parcelAsString = blockchainRepository.getParcelAsString(id);
-//        String sender = parcelAsString.substring(0);
-//        String recipient = parcelAsString.substring(0);
-//        String committedBy = parcelAsString.substring(0);
-//        String connectedPersonId = parcelAsString.substring(0);
-//        String parcelType = parcelAsString.substring(0);
-//        LocalDateTime commitTimestamp = LocalDateTime.parse(parcelAsString.substring(0));
         return new StringParcelResponse(parcelAsString);
     }
 

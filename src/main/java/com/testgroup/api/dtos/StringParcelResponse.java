@@ -2,10 +2,8 @@ package com.testgroup.api.dtos;
 
 import com.testgroup.domain.ParcelType;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -29,7 +27,7 @@ public class StringParcelResponse {
         recipient = responseLines[1];
         connectedPerson = responseLines[2];
         committedBy = responseLines[3];
-        parcelType = toParcelType(bytesToInt( responseLines[5].getBytes() ));
+        parcelType = toParcelType(bytesToInt(responseLines[5].getBytes()));
     }
 
     public static SimpleDateFormat getDateFormat() {
@@ -37,17 +35,22 @@ public class StringParcelResponse {
     }
 
     private String toParcelType(int parcelTypeNr) {
-        ParcelType type ;
-        switch (parcelTypeNr){
-            case 0 : type = ParcelType.LETTER;
-                     break;
-            case 1 : type = ParcelType.PACK;
-                     break;
-            case 2 : type = ParcelType.INVOICE;
-                     break;
-            case 3 : type = ParcelType.EMAIL;
-                     break;
-            default : throw new IllegalArgumentException("undefined parcel type");
+        ParcelType type;
+        switch (parcelTypeNr) {
+            case 0:
+                type = ParcelType.LETTER;
+                break;
+            case 1:
+                type = ParcelType.PACK;
+                break;
+            case 2:
+                type = ParcelType.INVOICE;
+                break;
+            case 3:
+                type = ParcelType.EMAIL;
+                break;
+            default:
+                throw new IllegalArgumentException("undefined parcel type");
         }
         return type.toString();
     }
@@ -92,25 +95,24 @@ public class StringParcelResponse {
         this.parcelType = parcelType;
     }
 
-
-
     private long bytesToLong(byte[] bytes) {
         ByteBuffer buffer = ByteBuffer.allocate(Long.BYTES);
-        if(bytes.length > Long.BYTES) {
-            System.out.println( bytes.length - Long.BYTES);
+        if (bytes.length > Long.BYTES) {
+            System.out.println(bytes.length - Long.BYTES);
             buffer.put(bytes, bytes.length - Long.BYTES, Long.BYTES);
-        }else{
+        } else {
             int bytesLeft = Long.BYTES - bytes.length;
-            if( bytesLeft > 0){
+            if (bytesLeft > 0) {
                 buffer.put(new byte[bytesLeft]);
             }
             buffer.put(bytes);
         }
         buffer.flip();//need flip
-        System.out.println( "timestamp from buffer: "+buffer.getLong());
-        System.out.println( "timestamp now: "+ (new Date().getTime()));
+        System.out.println("timestamp from buffer: " + buffer.getLong());
+        System.out.println("timestamp now: " + (new Date().getTime()));
         return buffer.getLong();
     }
+
     private int bytesToInt(byte[] bytes) {
         ByteBuffer buffer = ByteBuffer.allocate(Integer.BYTES);
         int bytesLeft = Integer.BYTES - bytes.length;
