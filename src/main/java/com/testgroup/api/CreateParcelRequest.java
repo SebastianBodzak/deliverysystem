@@ -27,7 +27,7 @@ public class CreateParcelRequest {
         return parcel.getCommittedBy();
     }
 
-    public String getConent() {
+    public String getContent() {
         return parcel.getContent();
     }
 

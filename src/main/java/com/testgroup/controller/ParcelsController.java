@@ -37,4 +37,9 @@ public class ParcelsController {
     public StringParcelResponse geParcelAsString(@PathVariable Long id) {
         return sendingService.getStringParcel(id);
     }
+
+    @GetMapping("/asIds/{id}")
+    public IdsParcelResponse geParcelAsIds(@PathVariable Long id) {
+        return sendingService.getParcelIds(id);
+    }
 }

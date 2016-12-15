@@ -248,6 +248,10 @@ public class BlockchainRepository {
         return (String) contract.callFunction("getParcelAsString", id).getReturnValue();
     }
 
+    public byte[] getParcelIds(Long id) {
+        return (byte[]) contract.callFunction("getParcelAsIds", id).getReturnValue();
+    }
+
     public BigInteger getUserByName(String userFullName) {
         return (BigInteger) contract.callFunction("getUserId", userFullName).getReturnValue();
     }
