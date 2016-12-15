@@ -3,6 +3,7 @@ package com.testgroup.controller;
 import com.testgroup.api.CreateParcelRequest;
 import com.testgroup.api.PackageInformationReceiver;
 import com.testgroup.api.SendingService;
+import com.testgroup.api.StringParcelResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
@@ -32,8 +33,8 @@ public class ParcelsController {
         return packageInformationReceiver.getParcelsCount();
     }
 
-//    @GetMapping("/string/{id}")
-//    public StringParcelResponse geParcelAsString(@PathVariable Long id) {
-//
-//    }
+    @GetMapping("/string/{id}")
+    public StringParcelResponse geParcelAsString(@PathVariable Long id) {
+        return sendingService.getStringParcel(id);
+    }
 }

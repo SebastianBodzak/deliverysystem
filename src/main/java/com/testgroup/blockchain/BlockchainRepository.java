@@ -1,5 +1,8 @@
 package com.testgroup.blockchain;
 
+import com.testgroup.api.StringParcelResponse;
+import com.testgroup.domain.ParcelType;
+import com.testgroup.domain.User;
 import org.ethereum.config.SystemProperties;
 import org.ethereum.config.blockchain.FrontierConfig;
 import org.ethereum.util.blockchain.SolidityCallResult;
@@ -239,6 +242,10 @@ public class BlockchainRepository {
 
     public BigInteger getParcelsCount() {
         return (BigInteger) contract.callFunction("getParcelsCount").getReturnValue();
+    }
+
+    public String getParcelAsString(Long id) {
+        return (String) contract.callFunction("getParcelAsString", id).getReturnValue();
     }
 
     public BigInteger getUserByName(String userFullName) {

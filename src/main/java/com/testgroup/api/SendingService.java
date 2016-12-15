@@ -1,7 +1,8 @@
 package com.testgroup.api;
 
 import com.testgroup.blockchain.BlockchainRepository;
-import com.testgroup.domain.*;
+import com.testgroup.domain.ParcelType;
+import com.testgroup.domain.ShipmentRegistry;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,7 +32,14 @@ public class SendingService {
         return parcelId;
     }
 
-    private Parcel createParcel(CreateParcelRequest request, User recipient, User sender) {
-        return new Parcel(new Attachment(request.getAttachment()), request.getConent(), ParcelType.valueOf(request.getParcelType()), recipient, sender);
+    public StringParcelResponse getStringParcel(Long id) {
+        String parcelAsString = blockchainRepository.getParcelAsString(id);
+        String sender = parcelAsString.substring(0);
+        String recipient = parcelAsString.substring(0);
+        String committedBy = parcelAsString.substring(0);
+        String connectedPersonId = parcelAsString.substring(0);
+        String parcelType = parcelAsString.substring(0);
+        LocalDateTime commitTimestamp = LocalDateTime.parse(parcelAsString.substring(0));
+        return new StringParcelResponse(sender, recipient, committedBy, connectedPersonId, parcelType, commitTimestamp);
     }
 }
